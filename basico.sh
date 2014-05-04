@@ -95,6 +95,11 @@ sudo apt-get install gimp
 ########################
 sudo apt-get install git
 
-##Actualizamos el sistema de nuevo.
+###############
+# Cliente FTP #
+###############
+sudo apt-get install filezilla
+
+## Actualizamos el sistema de nuevo. ##
 sudo apt-get update
 sudo apt-get upgrade
