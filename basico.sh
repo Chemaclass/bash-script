@@ -13,7 +13,6 @@ sudo apt-get install ubuntu-restricted-extras
 ## Instalar aplicaciones de compresión
 sudo apt-get install rar unace p7zip-full p7zip-rar sharutils mpack lha arj
 
-
 ###################
 # Personalización #
 ###################
@@ -27,9 +26,9 @@ sudo apt-get install indicator-synapse
 sudo apt-get install elementary-blue-theme elementary-champagne-theme elementary-colors-theme elementary-dark-theme elementary-harvey-theme elementary-lion-theme elementary-milk-theme elementary-plastico-theme elementary-whit-e-theme elementary-elfaenza-icons elementary-emod-icons elementary-enumix-utouch-icons elementary-nitrux-icons elementary-taprevival-icons elementary-thirdparty-icons elementary-plank-themes elementary-wallpaper-collection
 
 #########################################
-# OpenJdk Java: 						#
-# 	sudo apt-get install openjdk-7-jdk  #
-# Oracle  Java 							#
+# OpenJdk Java: 						
+# 	sudo apt-get install openjdk-7-jdk  
+# Oracle  Java 							
 #########################################
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
@@ -78,12 +77,10 @@ sudo apt-get install dconf-tools
 # Para poder usar comandos como "gcc" "make"
 sudo apt-get install build-essential
 
-
 ########################################
 # Monitorizar temperaturas de hardware #
 ########################################
 sudo apt-get install lm-sensors hddtemp
-
 
 ########################
 # Editores de imágenes #
@@ -99,6 +96,16 @@ sudo apt-get install git
 # Cliente FTP #
 ###############
 sudo apt-get install filezilla
+
+#############################
+# Lenguajes de Programación #
+#############################
+## Golang
+sudo add-apt-repository ppa:gophers/go
+sudo apt-get update
+sudo apt-get install golang-stable
+
+
 
 ## Actualizamos el sistema de nuevo. ##
 sudo apt-get update
