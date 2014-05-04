@@ -99,6 +99,11 @@ sudo apt-get install build-essential
 sudo apt-get install lm-sensors hddtemp
 
 
+########################
+# Editores de imágenes #
+########################
+sudo apt-get install gimp
+
 ##Actualizamos el sistema de nuevo.
 sudo apt-get update
 sudo apt-get upgrade
