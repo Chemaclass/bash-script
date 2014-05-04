@@ -52,6 +52,14 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java7-installer
 
+########################
+# Fuentes de microsoft #
+########################
+sudo apt-get install ttf-mscorefonts-installer
+#Después para añadirlas a todas las aplicaciones actualizar la caché con:
+sudo fc-cache
+
+
 
 ##Actualizamos el sistema de nuevo.
 sudo apt-get update
