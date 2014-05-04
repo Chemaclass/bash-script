@@ -59,6 +59,20 @@ sudo apt-get install ttf-mscorefonts-installer
 #Después para añadirlas a todas las aplicaciones actualizar la caché con:
 sudo fc-cache
 
+#####################################################################
+# libdvdcss - para poder ver DVD's / CD's originales o comerciales: #
+#####################################################################
+sudo apt-get install curl
+# Descargar e instalar la llave pública de los repositorios de Videolan:
+curl ftp://ftp.videolan.org/pub/debian/videolan-apt.asc | sudo apt-key add -
+#Añadir los repositorios de Videolan:
+echo "deb ftp://ftp.videolan.org/pub/debian/stable ./" | sudo tee /etc/apt/sources.list.d/libdvdcss.list
+#Actualizar la lista de repositorios:
+sudo apt-get update
+#E instalar libdvdcss2:
+sudo apt-get install libdvdcss2
+#Al instalar "ubuntu-restricted-extras" se habrá instalado "libdvdread4" en "/usr/share/doc" y nos queda ejecutarlo con:
+sudo /usr/share/doc/libdvdread4/install-css.sh
 
 
 ##Actualizamos el sistema de nuevo.
