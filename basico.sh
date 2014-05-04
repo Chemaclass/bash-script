@@ -42,6 +42,17 @@ sudo apt-get install elementary-blue-theme elementary-champagne-theme elementary
 # GIMP, editor de imágenes (tipo Photoshop)
 # LibreOffice, Suite de ofimática (MS Office pero libre)
 
+#########################################
+# OpenJdk Java: 						#
+# 	sudo apt-get install openjdk-7-jdk  #
+# Oracle  Java 							#
+#########################################
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java7-installer
+
+
 ##Actualizamos el sistema de nuevo.
 sudo apt-get update
 sudo apt-get upgrade
