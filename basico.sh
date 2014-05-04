@@ -121,6 +121,19 @@ make && sudo make install
 mkdir ~/bin
 ln -s /opt/python3.3/bin/python3.3 ~/bin/py
 
+## Scala
+sudo apt-get remove scala-library scala
+wget www.scala-lang.org/files/archive/scala-2.11.0.deb
+sudo dpkg -i scala-2.11.0.deb
+sudo apt-get update
+sudo apt-get install scala
+# sbt installation
+# remove sbt:>  sudo apt-get purge sbt. 
+wget http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
+sudo dpkg -i sbt.deb
+sudo apt-get update
+sudo apt-get install sbt
+
 
 
 ## Actualizamos el sistema de nuevo. ##
