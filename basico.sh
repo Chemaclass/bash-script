@@ -90,6 +90,11 @@ sudo apt-get install lm-sensors hddtemp
 ########################
 sudo apt-get install gimp
 
+########################
+# Control de versiones #
+########################
+sudo apt-get install git
+
 ##Actualizamos el sistema de nuevo.
 sudo apt-get update
 sudo apt-get upgrade
