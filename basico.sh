@@ -86,6 +86,13 @@ sudo apt-get install aptitude
 
 sudo apt-get install dconf-tools
 
+##################################
+# Software básico de compilación #
+##################################
+# Para poder usar comandos como "gcc" "make"
+sudo apt-get install build-essential
+
+
 
 ##Actualizamos el sistema de nuevo.
 sudo apt-get update
