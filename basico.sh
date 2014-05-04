@@ -134,6 +134,8 @@ sudo dpkg -i sbt.deb
 sudo apt-get update
 sudo apt-get install sbt
 
+## Erlang
+sudo apt-get install erlang erlang-doc
 
 
 ## Actualizamos el sistema de nuevo. ##
