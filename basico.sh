@@ -93,6 +93,11 @@ sudo apt-get install dconf-tools
 sudo apt-get install build-essential
 
 
+########################################
+# Monitorizar temperaturas de hardware #
+########################################
+sudo apt-get install lm-sensors hddtemp
+
 
 ##Actualizamos el sistema de nuevo.
 sudo apt-get update
