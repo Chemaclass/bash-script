@@ -105,6 +105,22 @@ sudo add-apt-repository ppa:gophers/go
 sudo apt-get update
 sudo apt-get install golang-stable
 
+## Python 3
+sudo apt-get install build-essential
+# SQLite libs need to be installed in order for Python to have SQLite support.
+sudo apt-get install libsqlite3-dev
+sudo apt-get install sqlite3 # for the command-line client
+sudo apt-get install bzip2 libbz2-dev
+# Download and compile Python:
+wget http://www.python.org/ftp/python/3.3.5/Python-3.3.5.tar.xz
+tar xJf ./Python-3.3.5.tar.xz
+cd ./Python-3.3.5
+./configure --prefix=/opt/python3.3
+make && sudo make install
+# Some nice touches to install a py command by creating a symlink:
+mkdir ~/bin
+ln -s /opt/python3.3/bin/python3.3 ~/bin/py
+
 
 
 ## Actualizamos el sistema de nuevo. ##
