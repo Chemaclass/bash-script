@@ -120,7 +120,9 @@ make && sudo make install -y
 # Some nice touches to install a py command by creating a symlink:
 mkdir ~/bin -y
 ln -s /opt/python3.3/bin/python3.3 ~/bin/py -y
+
 sudo apt-get install python3-minimal
+sudo apt-get install python3.2-tk #gráficos python*3*-tk
 
 ## Scala
 sudo apt-get remove scala-library scala -y
