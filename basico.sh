@@ -121,8 +121,9 @@ make && sudo make install -y
 mkdir ~/bin -y
 ln -s /opt/python3.3/bin/python3.3 ~/bin/py -y
 
-sudo apt-get install python3-minimal
-sudo apt-get install python3.2-tk #gráficos python*3*-tk
+sudo apt-get install python3-minimal -y
+sudo apt-get install python3.2-tk -y # gráficos python*3*-tk
+sudo apt-get install python-wxgtk2.8 -y #
 
 ## Scala
 sudo apt-get remove scala-library scala -y
