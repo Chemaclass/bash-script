@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 
 #################################################################
-# Must install wxtools for Py:									#
-# 	apt-get install python-wxgtk2.8 python-wxtools wx2.8-i18n	#
-# And then give execute permissions to this file.				#
+# First you must install wxtools for Py:
+# 	apt-get install python-wxgtk2.8 python-wxtools wx2.8-i18n
+# And then give execute permissions to this file.
 #################################################################
 
 import wx
