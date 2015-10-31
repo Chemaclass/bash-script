@@ -39,7 +39,10 @@ var si = setInterval(function() {
     } else {
         btn_no.click(name);
     }
-    if (with_log) console.log("y: " + btn_yes.names.length + ", n: " + btn_no.names.length);
+    if (with_log) {
+        console.log("yes: " + btn_yes.names.length + ", no: " + btn_no.names.length
+            + ", total: " + (btn_yes.names.length+btn_no.names.length));
+    }
 }, each_ms);
 // ========================== END ==========================
 
