@@ -3,6 +3,12 @@
 *
 * I like Lovoo app, but sometimes can be funnier, especially when you can play and
 * doing another things at the same time, you know :-)
+*
+* As you should know, Lovoo is an app (movil&web) where you can "judge the aspect" of other people.
+* I mean like FB did in his begining. You can see picture from another persons and say "like"
+* or "don't like" it. So, I did an script to say that automatically if the person is from "from_where"
+* and should be a verified person. In case the person is from the city I choose before just do
+* an auto-click in "like", otherwise just "don't like".
 */
 
 // .dev
