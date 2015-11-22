@@ -1,6 +1,12 @@
-#############################
-########## replace ##########
-#############################
+
+#
+# Replace a string to another one in all files
+# contained inside a path directory.
+#
+# @param string $1 String to search.
+# @param string $2 String to replace.
+# @param string $3 Where start to search the files.
+#
 func_replace() {
 	search=${1}
 	replace=${2}
@@ -42,3 +48,4 @@ func_replace() {
 	echo "> Total updated files: ${total_files}."	
 }
 alias replace=func_replace
+
