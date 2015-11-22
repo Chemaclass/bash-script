@@ -17,7 +17,7 @@ func_replace() {
 	total_matches=0
 
 	echo "search: $search | replace: $replace"
-	# show 
+	# Show all matches by each possible file.
 	for f in $(find $path -type f); do
 		# Check if they're something.
 		nr_matches=$(grep "$search" $f | wc -l)
@@ -38,7 +38,7 @@ func_replace() {
 	fi
 
 	tfile="/tmp/out.$$"
-	echo "Let's do it! "
+	echo "Let's do it!"
 	for f in $(find $path -type f); do
 		# Check if they're something.
 		nr_matches=$(grep "$search" $f | wc -l)
