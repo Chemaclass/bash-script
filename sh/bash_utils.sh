@@ -22,7 +22,7 @@ func_replace() {
 	for f in $(find $path -type f); do
 		if [ -f $f -a -r $f ]; then
 			# Check if they're something.
-			nr_matches=$(grep -o "$search" $f | wc -l)
+			nr_matches=$(grep "$search" $f | wc -l)
 			if [ $nr_matches -gt 0 ]; then
 				sed "s/$search/$replace/g" "$f" > $tfile && mv $tfile "$f"
 				echo "> Nr matches: $nr_matches in $f"
