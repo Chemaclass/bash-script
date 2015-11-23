@@ -75,7 +75,7 @@ var si = setInterval(function() {
     var name_age = u.prev().text().split(", ");
     var name = name_age[0];
     var age = name_age[1];
-    
+
     // Create the person.
     var person = new Person(name, age, city, is_u_verified);
     // Put the person inside the correct Btn object.
@@ -84,15 +84,16 @@ var si = setInterval(function() {
     } else {
         btn_no.click(person);
     }
-    
-    // Should we print the log?
+
     var persons_length = (btn_yes.persons.length + btn_no.persons.length);
+
+    // Should we print the log?
     if (with_log) {
         console.log("yes: " + btn_yes.persons.length 
             + ", no: " + btn_no.persons.length
             + ", total: " + persons_length);
-    }
-    
+    }    
+
     // Check if we should to stop it.
     if (limit != -1 && persons_length >= limit) {
         clearInterval(si);
@@ -102,13 +103,17 @@ var si = setInterval(function() {
 // ========================== END ==========================
 
 // (.min) The same but minified
-var from_where="berlin",only_verified=!0,each_ms=200,with_log=!0,
-Btn=function(n){var e=$("span[ng-click='voteUser("+n+"); $event.stopPropagation();']");return this.names=[],{click:function(n){e.click(),this.names.push(n)},names:this.names}},
+var from_where="berlin",only_verified=!0,each_ms=200,with_log=!0,limit=-1,
+Person=function(n,e,t,i){this.name=n,this.age=e,this.city=t,this.verified=i},
+Btn=function(n){var e=$("span[ng-click='voteUser("+n+"); $event.stopPropagation();']");return this.persons=[],{click:function(n){e.click(),this.persons.push(n)},persons:this.persons}},
 btn_yes=new Btn(1),btn_no=new Btn(0),
 si=setInterval(function(){var n=$("div[ng-if='user'] div:nth-child(2) .h6"),
 e=-1==n.find("div:nth-child(3) div").text().toLowerCase().indexOf(" no "),
-t=0!=n.find("div:nth-child(1)").text().toLowerCase().indexOf(from_where),i=n.prev().text();
-t&&(!only_verified||only_verified&&e)?btn_yes.click(i):btn_no.click(i),
-with_log&&console.log("y: "+btn_yes.names.length+", n: "+btn_no.names.length)},each_ms);
+t=n.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[1],
+i=0!=t.indexOf(from_where.toLowerCase()),s=n.prev().text().split(", "),o=s[0],r=s[1],l=new Person(o,r,t,e);
+i&&(!only_verified||only_verified&&e)?btn_yes.click(l):btn_no.click(l);
+var h=btn_yes.persons.length+btn_no.persons.length;
+with_log&&console.log("yes: "+btn_yes.persons.length+", no: "+btn_no.persons.length+", total: "+h),
+-1!=limit&&h>=limit&&clearInterval(si)},each_ms);
 
 // Remember -> You can stop the execution with: 'clearInterval(si)'
