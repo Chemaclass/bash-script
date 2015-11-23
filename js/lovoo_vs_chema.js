@@ -71,7 +71,7 @@ var si = setInterval(function() {
     var is_u_verified = (u.find("div:nth-child(3) div")
         .text().toLowerCase().indexOf(" no ") == -1);
     var city = u.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[1];
-    var is_u_from_where = (city.indexOf(from_where.toLowerCase()) != 0);
+    var is_u_from_where = (city.indexOf(from_where.toLowerCase()) != -1);
     var name_age = u.prev().text().split(", ");
     var name = name_age[0];
     var age = name_age[1];
