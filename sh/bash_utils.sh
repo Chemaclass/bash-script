@@ -31,7 +31,7 @@ func_replace() {
 
 	echo "Are you sure do you want to exec: ´sed 's/$search/$replace/g'´ in ´${path}´? [Y/N]:"
 	read sure
-	sure=${sure:N}
+	sure=${sure:-N}
 	if [[ "$sure" != "y" && "$sure" != "Y" && "$sure" != "yes" && "$sure" != "YES" ]] ; then
 		echo "Ok, nope."
 		return
