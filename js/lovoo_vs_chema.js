@@ -1,5 +1,5 @@
 /**
-* @author: José María Valera Reales
+* @author: José María Valera Reales <Chemaclass>
 *
 * I like Lovoo app, but sometimes can be funnier, especially when you can play and
 * doing another things at the same time, you know :-)
@@ -17,31 +17,39 @@ var from_where = "berlin";
 var only_verified = true;
 var each_ms = 200;
 var with_log = true;
+var Person = function(name,age) {
+    this.name = name;
+    this.age = age;
+};
 var Btn = function(n) {
     var btn = $("span[ng-click='voteUser(" + n + "); $event.stopPropagation();']");
-    this.names = [];
+    this.persons = [];
     return {
-        'click':function(name) {
+        'click':function(person) {
             btn.click();
-            this.names.push(name);
+            this.persons.push(person);
         },
-        'names':this.names
+        'persons':this.persons
     }
 };
 var btn_yes = new Btn(1), btn_no = new Btn(0);
 var si = setInterval(function() {
     var u = $("div[ng-if='user'] div:nth-child(2) .h6");
-    var is_u_verified = (u.find("div:nth-child(3) div").text().toLowerCase().indexOf(" no ") == -1);
-    var is_u_from_where = (u.find("div:nth-child(1)").text().toLowerCase().indexOf(from_where) != 0);
-    var name = u.prev().text();
+    var is_u_verified = (u.find("div:nth-child(3) div")
+        .text().toLowerCase().indexOf(" no ") == -1);
+    var is_u_from_where = (u.find("div:nth-child(1)")
+        .text().toLowerCase().indexOf(from_where.toLowerCase()) != 0);
+    var name_age = u.prev().text().split(", ");
+    var name = name_age[0];
+    var age = name_age[1];
     if (is_u_from_where && (!only_verified || (only_verified && (is_u_verified)))) {
-        btn_yes.click(name);
+        btn_yes.click(new Person(name, age, city, verified));
     } else {
-        btn_no.click(name);
+        btn_no.click(new Person(name, age, city, verified));
     }
     if (with_log) {
-        console.log("yes: " + btn_yes.names.length + ", no: " + btn_no.names.length
-            + ", total: " + (btn_yes.names.length+btn_no.names.length));
+        console.log("yes: " + btn_yes.persons.length + ", no: " + btn_no.persons.length
+            + ", total: " + (btn_yes.persons.length+btn_no.persons.length));
     }
 }, each_ms);
 // ========================== END ==========================
