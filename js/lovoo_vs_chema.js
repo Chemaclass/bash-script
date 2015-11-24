@@ -68,8 +68,8 @@ var btn_no = new Btn(0);
 */
 var si = setInterval(function() {
     var u = $("div[ng-if='user'] div:nth-child(2) .h6");
-    var is_u_verified = (u.find("div:nth-child(3) div")
-        .text().toLowerCase().indexOf(" no ") == -1);
+    var u_verified =u.find("div:nth-child(3) div").text().toLowerCase();
+    var is_u_verified = (u_verified.indexOf(" no ") == -1);
     var city = u.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[1];
     var is_u_from_where = (city.indexOf(from_where.toLowerCase()) != -1);
     var name_age = u.prev().text().split(", ");
@@ -79,13 +79,13 @@ var si = setInterval(function() {
     // Create the person.
     var person = new Person(name, age, city, is_u_verified);
     // Put the person inside the correct Btn object.
-    if (is_u_from_where && (!only_verified || (only_verified && (is_u_verified)))) {
+    if (is_u_from_where && (!only_verified || (only_verified && is_u_verified))) {
         btn_yes.click(person);
     } else {
         btn_no.click(person);
     }
 
-    var persons_length = (btn_yes.persons.length + btn_no.persons.length);
+    var persons_length = btn_yes.persons.length + btn_no.persons.length
 
     // Should we print the log?
     if (with_log) {
