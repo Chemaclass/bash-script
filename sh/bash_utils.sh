@@ -35,7 +35,12 @@ func_replace() {
 		fi
 	done
 	echo "> Matches: ${total_matches} | Files: ${total_files}."	
-    
+
+    if [[ $total_files -eq 0 ]]; then
+        echo "> There are no matches to replace as '$search' in $path"
+        return
+    fi
+
 	echo "Are you sure do you want to exec: ´sed 's/$search/$replace/g'´ in ´${path}´? [Y/N]:"
 	read sure
 	sure=${sure:-N}
