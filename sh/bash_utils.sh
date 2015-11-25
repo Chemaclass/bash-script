@@ -65,6 +65,5 @@ func_replace() {
 	fi
 	echo "Everything was fine. Enjoy :-)"
 }
-echo "replace func updated!"
 alias replace=func_replace
 
