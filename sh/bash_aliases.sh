@@ -1,6 +1,6 @@
 # A
 alias alza='sudo shutdown -h now'
-alias alza_r='sudo shutdown -r now'
+alias alzar='sudo shutdown -r now'
 # B
 # C
 alias c='clear'
