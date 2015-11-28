@@ -109,7 +109,7 @@ Btn=function(n){var e=$("span[ng-click='voteUser("+n+"); $event.stopPropagation(
 btn_yes=new Btn(1),btn_no=new Btn(0),
 si=setInterval(function(){var n=$("div[ng-if='user'] div:nth-child(2) .h6"),
 e=-1==n.find("div:nth-child(3) div").text().toLowerCase().indexOf(" no "),
-t=n.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[1],
+t=n.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[0],
 i=0!=t.indexOf(from_where.toLowerCase()),s=n.prev().text().split(", "),o=s[0],r=s[1],l=new Person(o,r,t,e);
 i&&(!only_verified||only_verified&&e)?btn_yes.click(l):btn_no.click(l);
 var h=btn_yes.persons.length+btn_no.persons.length;
