@@ -1,9 +1,7 @@
-# Install Apache
-# sudo apt-get install apache2
+#!/bin/bash
 
-# Install Mysql
-# sudo apt-get install mysql-server
-# sudo apt-get install php-mysql
+# Install Apache
+sudo apt-get install apache2
 
 # Install PHP 7
 sudo apt-get remove php5*
@@ -14,5 +12,10 @@ sudo apt-get install php7.0
 sudo a2enmod php7.0
 sudo a2dismod php5
 
+# Install Mysql
+sudo apt-get install mysql-server
+sudo apt-get install php-mysql
+
+sudo chown -R www-data:www-data /var/lib/php/sessions/
 
 
