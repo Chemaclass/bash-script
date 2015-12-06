@@ -16,6 +16,9 @@ sudo a2dismod php5
 sudo apt-get install mysql-server
 sudo apt-get install php-mysql
 
+# In php.ini file (/etc/php/7.0/apache2/php.ini) you should 
+# have active: `session.save_path = "/var/lib/php/sessions"`
+# After this make sure this path has enough permissions:
 sudo chown -R www-data:www-data /var/lib/php/sessions/
 
 
