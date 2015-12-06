@@ -1,5 +1,5 @@
 #
-# findd is another way to use find.
+# find2 is another way to use find.
 #
 # @param string $1 Name
 # @param string $2 Path
