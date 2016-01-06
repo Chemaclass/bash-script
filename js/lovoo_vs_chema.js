@@ -37,7 +37,7 @@ var limit = -1;
 /**
 * Get yes or no depending on the user language choose.
 */
-function getYesOrNoByLang(what){
+function getByLang(what){
     return (function(what) {
         switch(user_lang) {
             case LANG_ENGLISH: return (NO == what)?"not":"yes";
@@ -48,9 +48,9 @@ function getYesOrNoByLang(what){
     }(what));
 }
 /** @var String No using the current user language. */
-var no_in_user_lang = getYesOrNoByLang(NO);
+var no_in_user_lang = getByLang(NO);
 /** @var String Yes using the current user language. */
-var yes_in_user_lang = getYesOrNoByLang(YES);
+var yes_in_user_lang = getByLang(YES);
 
 /**
 * Person object.
