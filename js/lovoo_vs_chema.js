@@ -13,8 +13,17 @@
 
 // .dev
 // ======================== BEGIN ========================
+// Some constants.
+NO = "not";
+YES = "yes";
+LANG_ENGLISH = "en";
+LANG_SPANISH = "es";
+LANG_GERMAN = "de";
 
-/** @var string City to searh. */
+/** @var string The language of the current user.
+*   For example: LANG_ENGLISH, LANG_SPANISH, LANG_GERMAN */
+var user_lang = LANG_ENGLISH;
+/** @var string City to search. A empty string means you don't care, so all are good. */
 var from_where = "berlin";
 /** @var bool Care about if the person was verified before. */
 var only_verified = true;
@@ -24,6 +33,24 @@ var each_ms = 200;
 var with_log = true;
 /** @var int Limit of persons to check. -1 means infinite loop. */
 var limit = -1;
+
+/**
+* Get yes or no depending on the user language choose.
+*/
+function getYesOrNoByLang(what){
+    return (function(what) {
+        switch(user_lang) {
+            case LANG_ENGLISH: return (NO == what)?"not":"yes";
+            case LANG_SPANISH: return (NO == what)?"no":"sí";
+            case LANG_GERMAN: return (NO == what)?"nein":"ja";
+            default: return "undefined";
+        }
+    }(what));
+}
+/** @var String No using the current user language. */
+var no_in_user_lang = getYesOrNoByLang(NO);
+/** @var String Yes using the current user language. */
+var yes_in_user_lang = getYesOrNoByLang(YES);
 
 /**
 * Person object.
@@ -60,6 +87,20 @@ var btn_yes = new Btn(1);
 /** @var Btn btn_no */
 var btn_no = new Btn(0);
 
+/** 
+* Check and select the correct button taking care about the person info
+*/
+function pressTheCorrectButton(is_u_from_where, person){
+
+    var only_verified = person.verified;
+    
+    if (is_u_from_where && (!only_verified || (only_verified && is_u_verified))) {
+        btn_yes.click(person);
+    } else {
+        btn_no.click(person);
+    }
+}
+
 /**
 * Do each time. This is the main function.
 * 
@@ -69,9 +110,9 @@ var btn_no = new Btn(0);
 var si = setInterval(function() {
     var u = $("div[ng-if='user'] div:nth-child(2) .h6");
     var u_verified =u.find("div:nth-child(3) div").text().toLowerCase();
-    var is_u_verified = (u_verified.indexOf(" no ") == -1);
+    var is_u_verified = (u_verified.indexOf(" "+no_in_user_lang+" ") == -1);
     var city = u.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[0];
-    var is_u_from_where = (city.indexOf(from_where.toLowerCase()) != -1);
+    var is_u_from_where = (from_where.length==0)?true:(city.indexOf(from_where.toLowerCase()) != -1);
     var name_age = u.prev().text().split(", ");
     var name = name_age[0];
     var age = name_age[1];
@@ -79,20 +120,16 @@ var si = setInterval(function() {
     // Create the person.
     var person = new Person(name, age, city, is_u_verified);
     // Put the person inside the correct Btn object.
-    if (is_u_from_where && (!only_verified || (only_verified && is_u_verified))) {
-        btn_yes.click(person);
-    } else {
-        btn_no.click(person);
-    }
+    pressTheCorrectButton(is_u_from_where, person);
 
     var persons_length = btn_yes.persons.length + btn_no.persons.length
 
     // Should we print the log?
     if (with_log) {
-        console.log("yes: " + btn_yes.persons.length 
-            + ", no: " + btn_no.persons.length
+        console.log(yes_in_user_lang+": " + btn_yes.persons.length 
+            + ", "+no_in_user_lang+": " + btn_no.persons.length
             + ", total: " + persons_length);
-    }    
+    }
 
     // Check if we should to stop it.
     if (limit != -1 && persons_length >= limit) {
