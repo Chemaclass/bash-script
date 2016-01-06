@@ -103,17 +103,6 @@ var si = setInterval(function() {
 // ========================== END ==========================
 
 // (.min) The same but minified
-var from_where="berlin",only_verified=!0,each_ms=200,with_log=!0,limit=-1,
-Person=function(n,e,t,i){this.name=n,this.age=e,this.city=t,this.verified=i},
-Btn=function(n){var e=$("span[ng-click='voteUser("+n+"); $event.stopPropagation();']");return this.persons=[],{click:function(n){e.click(),this.persons.push(n)},persons:this.persons}},
-btn_yes=new Btn(1),btn_no=new Btn(0),
-si=setInterval(function(){var n=$("div[ng-if='user'] div:nth-child(2) .h6"),
-e=-1==n.find("div:nth-child(3) div").text().toLowerCase().indexOf(" no "),
-t=n.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[0],
-i=0!=t.indexOf(from_where.toLowerCase()),s=n.prev().text().split(", "),o=s[0],r=s[1],l=new Person(o,r,t,e);
-i&&(!only_verified||only_verified&&e)?btn_yes.click(l):btn_no.click(l);
-var h=btn_yes.persons.length+btn_no.persons.length;
-with_log&&console.log("yes: "+btn_yes.persons.length+", no: "+btn_no.persons.length+", total: "+h),
--1!=limit&&h>=limit&&clearInterval(si)},each_ms);
+var from_where="berlin",only_verified=!0,each_ms=200,with_log=!0,limit=-1,Person=function(n,e,t,i){this.name=n,this.age=e,this.city=t,this.verified=i},Btn=function(n){var e=$("span[ng-click='voteUser("+n+"); $event.stopPropagation();']");return this.persons=[],{click:function(n){e.click(),this.persons.push(n)},persons:this.persons}},btn_yes=new Btn(1),btn_no=new Btn(0),si=setInterval(function(){var n=$("div[ng-if='user'] div:nth-child(2) .h6"),e=n.find("div:nth-child(3) div").text().toLowerCase(),t=-1==e.indexOf(" no "),i=n.find("div:nth-child(1)").first().text().toLowerCase().split(" ")[0],s=-1!=i.indexOf(from_where.toLowerCase()),o=n.prev().text().split(", "),r=o[0],l=o[1],h=new Person(r,l,i,t);s&&(!only_verified||only_verified&&t)?btn_yes.click(h):btn_no.click(h);var c=btn_yes.persons.length+btn_no.persons.length;with_log&&console.log("yes: "+btn_yes.persons.length+", no: "+btn_no.persons.length+", total: "+c),-1!=limit&&c>=limit&&clearInterval(si)},each_ms);
 
 // Remember -> You can stop the execution with: 'clearInterval(si)'
