@@ -70,7 +70,8 @@ var Person = function(name, age, city, verified) {
 * Basically here we can manage easily the list of persons and the onlick event. 
 */
 var Btn = function(n) {
-    var btn = $("span[ng-click='voteUser(" + n + "); $event.stopPropagation();']");
+    //var btn = $("span[ng-click='voteUser(" + n + "); $event.stopPropagation();']");
+    var btn = $("span ."+ (1==n?"yes":"no"));
     this.persons = [];
     return {
         'click':function(person) {
