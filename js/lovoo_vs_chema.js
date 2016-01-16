@@ -92,10 +92,8 @@ var btn_no = new Btn(0);
 * Check and select the correct button taking care about the person info
 */
 function pressTheCorrectButton(is_u_from_where, person){
-
-    var only_verified = person.verified;
     
-    if (is_u_from_where && (!only_verified || (only_verified && is_u_verified))) {
+    if (is_u_from_where && (!only_verified || (only_verified && person.verified))) {
         btn_yes.click(person);
     } else {
         btn_no.click(person);
