@@ -17,18 +17,18 @@ class PyramidGeneratorTest extends WebTestCase
     }
 
     /**
-     * @dataProvider providerGenerateAsString
+     * @dataProvider providerGenerateAsStringUp
      * @param string $expected
      * @param int $height
      */
-    public function testGenerateAsString($expected, $height)
+    public function testGenerateAsStringUp($expected, $height)
     {
         $pyramid = new Pyramid($height);
-        $pyramidGenerator = new PyramidGenerator($pyramid);
+        $pyramidGenerator = new PyramidGenerator($pyramid,  PyramidGenerator::UP);
         $this->assertEquals($expected, $pyramidGenerator->generateAsString());
     }
 
-    public function providerGenerateAsString()
+    public function providerGenerateAsStringUp()
     {
         return [
             [
@@ -45,17 +45,62 @@ class PyramidGeneratorTest extends WebTestCase
                 '_***_' . PHP_EOL .
                 '*****',
                 3
-            ] ,
+            ],
             [
                 '___*___' . PHP_EOL .
                 '__***__' . PHP_EOL .
                 '_*****_' . PHP_EOL .
                 '*******',
                 4
-            ] ,
+            ],
         ];
     }
 
+    /**
+     * @dataProvider providerGenerateAsStringRight
+     * @param string $expected
+     * @param int $height
+     */
+    public function testGenerateAsStringRight($expected, $height)
+    {
+        $pyramid = new Pyramid($height);
+        $pyramidGenerator = new PyramidGenerator($pyramid, PyramidGenerator::RIGHT);
+        $this->assertEquals($expected, $pyramidGenerator->generateAsString());
+    }
+    
+    public function providerGenerateAsStringRight()
+    {
+        return [
+            [
+                '*',
+                1
+            ],
+            [
+                '*_'    . PHP_EOL .
+                '**'    . PHP_EOL.
+                '*_',
+                2
+            ],
+            [
+                '*__'   . PHP_EOL .
+                '**_'   . PHP_EOL.
+                '***'   . PHP_EOL.
+                '**_'   . PHP_EOL.
+                '*__',
+                3
+            ],[
+                '*___' . PHP_EOL .
+                '**__' . PHP_EOL.
+                '***_'   . PHP_EOL.
+                '****'  . PHP_EOL.
+                '***_' . PHP_EOL.
+                '**__' . PHP_EOL.
+                '*___',
+                4
+            ],
+        ];
+    }
+    
     /**
      * @dataProvider providerGenerateAsArray
      * @param string $expected

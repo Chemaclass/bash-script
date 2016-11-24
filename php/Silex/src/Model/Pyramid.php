@@ -13,13 +13,13 @@ class Pyramid
 
     /** @var int */
     private $height;
-
+    
     /** @var string */
     private $filledChar;
 
     /** @var string */
     private $emptyChar;
-
+    
     /**
      *
      * @param int $height        	

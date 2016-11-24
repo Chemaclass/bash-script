@@ -17,16 +17,22 @@ $console->register('pyramid')
     ->setDefinition(
         [
             new InputArgument('height', InputArgument::REQUIRED, 
-                    'The height of the Pyramid') 
+                    'The height of the Pyramid'),
+            new InputArgument('pointTo', InputArgument::OPTIONAL, 
+                    'The direction of the Pyramid') 
         ])
     ->setDescription('Render a Pyramid :)')
     ->setCode(
         function (InputInterface $input, OutputInterface $output) use ($app){
             $height = $input->getArgument('height');
+            $pointTo = $input->getArgument('pointTo');
             $output->writeln("height:" . $height);
+            if (empty($pointTo)) {
+                $pointTo = Pyramid::UP;
+            }
             
             $pyramid = new Pyramid($height);
-            $pyramidRender = new PyramidGenerator($pyramid);
+            $pyramidRender = new PyramidGenerator($pyramid, $pointTo);
             $output->writeln($pyramidRender->generateAsString());
         });
 
