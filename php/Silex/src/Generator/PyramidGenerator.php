@@ -9,8 +9,6 @@ use Model\Pyramid;
  */
 class PyramidGenerator
 {
-	const EMPTY_CHAR = '_';
-	const FILL_CHAR = '*';
 
 	/** @int */
 	private $pyramid;
@@ -40,9 +38,9 @@ class PyramidGenerator
 				$emptyAmount = 0;
 			}
 			
-			$emptyLeft = str_repeat(self::EMPTY_CHAR, $emptyAmount);
-			$filledChars = str_repeat(self::FILL_CHAR, $filledAmount);
-			$emptyRight = str_repeat(self::EMPTY_CHAR, $emptyAmount);
+			$emptyLeft = str_repeat($this->pyramid->getEmptyChar(), $emptyAmount);
+			$filledChars = str_repeat($this->pyramid->getFilledChar(), $filledAmount);
+			$emptyRight = str_repeat($this->pyramid->getEmptyChar(), $emptyAmount);
 			
 			$newRow = $emptyLeft . $filledChars . $emptyRight;
 			
@@ -68,9 +66,9 @@ class PyramidGenerator
 			$emptyAmount = ($maxLenght - $filledAmount) / 2;
 			
 			$newRow = [];
-			$this->addChars($newRow, self::EMPTY_CHAR, $emptyAmount);
-			$this->addChars($newRow, self::FILL_CHAR, $filledAmount);
-			$this->addChars($newRow, self::EMPTY_CHAR, $emptyAmount);
+			$this->addChars($newRow, $this->pyramid->getEmptyChar(), $emptyAmount);
+			$this->addChars($newRow, $this->pyramid->getFilledChar(), $filledAmount);
+			$this->addChars($newRow, $this->pyramid->getEmptyChar(), $emptyAmount);
 			
 			$result[] = $newRow;
 		}
