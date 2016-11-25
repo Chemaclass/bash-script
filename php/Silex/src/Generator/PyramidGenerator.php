@@ -67,28 +67,44 @@ class PyramidGenerator
 
     private function generateAsStringUp()
     {
-        $height = $this->pyramid->getHeight();
-        $maxLenght = ($height * 2) - 1;
         $result = '';
         
+        $height = $this->pyramid->getHeight();
         for ($row = 1; $row <= $height; $row++) {
-            
-            $filledAmount = ($row * 2) - 1;
-            $emptyAmount = ($maxLenght - $filledAmount) / 2;
-            
-            $emptyLeft = str_repeat($this->pyramid->getEmptyChar(), 
-                    $emptyAmount);
-            $filledChars = str_repeat($this->pyramid->getFilledChar(), 
-                    $filledAmount);
-            $emptyRight = str_repeat($this->pyramid->getEmptyChar(), 
-                    $emptyAmount);
-            
-            $newRow = $emptyLeft . $filledChars . $emptyRight;
-            
-            $result .= $newRow . PHP_EOL;
+            $result .= $this->generateRowAsStringVertical($row);
         }
         
         return rtrim($result);
+    }
+
+    private function generateAsStringDown()
+    {
+        $result = '';
+        
+        $height = $this->pyramid->getHeight();
+        for ($row = $height; $row >= 1; $row--) {
+            $result .= $this->generateRowAsStringVertical($row);
+        }
+        
+        return rtrim($result);
+    }
+
+    private function generateRowAsStringVertical($row)
+    {
+        $height = $this->pyramid->getHeight();
+        
+        $maxLenght = ($height * 2) - 1;
+        $filledAmount = ($row * 2) - 1;
+        $emptyAmount = ($maxLenght - $filledAmount) / 2;
+        
+        $emptyLeft = str_repeat($this->pyramid->getEmptyChar(), $emptyAmount);
+        $filledChars = str_repeat($this->pyramid->getFilledChar(), 
+                $filledAmount);
+        $emptyRight = str_repeat($this->pyramid->getEmptyChar(), $emptyAmount);
+        
+        $newRow = $emptyLeft . $filledChars . $emptyRight;
+        
+        return $newRow . PHP_EOL;
     }
 
     private function generateAsStringRight()
@@ -117,32 +133,6 @@ class PyramidGenerator
                     $emptyAmount);
             
             $newRow = $filledChars . $emptyRight;
-            
-            $result .= $newRow . PHP_EOL;
-        }
-        
-        return rtrim($result);
-    }
-
-    private function generateAsStringDown()
-    {
-        $height = $this->pyramid->getHeight();
-        $maxLenght = ($height * 2) - 1;
-        $result = '';
-        
-        for ($row = $height; $row >= 1; $row--) {
-            
-            $filledAmount = ($row * 2) - 1;
-            $emptyAmount = ($maxLenght - $filledAmount) / 2;
-            
-            $emptyLeft = str_repeat($this->pyramid->getEmptyChar(), 
-                    $emptyAmount);
-            $filledChars = str_repeat($this->pyramid->getFilledChar(), 
-                    $filledAmount);
-            $emptyRight = str_repeat($this->pyramid->getEmptyChar(), 
-                    $emptyAmount);
-            
-            $newRow = $emptyLeft . $filledChars . $emptyRight;
             
             $result .= $newRow . PHP_EOL;
         }
