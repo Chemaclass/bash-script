@@ -55,6 +55,47 @@ class PyramidGeneratorTest extends WebTestCase
             ],
         ];
     }
+    
+
+    /**
+     * @dataProvider providerGenerateAsStringDown
+     * @param string $expected
+     * @param int $height
+     */
+    public function testGenerateAsStringDown($expected, $height)
+    {
+        $pyramid = new Pyramid($height);
+        $pyramidGenerator = new PyramidGenerator($pyramid, PyramidGenerator::DOWN);
+        $this->assertEquals($expected, $pyramidGenerator->generateAsString());
+    }
+    
+    public function providerGenerateAsStringDown()
+    {
+        return [
+            [
+                '*',
+                1
+            ],
+            [
+                '***' . PHP_EOL .
+                '_*_',
+                2
+            ],
+            [
+                '*****' . PHP_EOL .
+                '_***_' . PHP_EOL .
+                '__*__',
+                3
+            ],
+            [
+                '*******' . PHP_EOL .
+                '_*****_' . PHP_EOL .
+                '__***__' . PHP_EOL .
+                '___*___' ,
+                4
+            ],
+        ];
+    }
 
     /**
      * @dataProvider providerGenerateAsStringRight
@@ -89,31 +130,32 @@ class PyramidGeneratorTest extends WebTestCase
                 '*__',
                 3
             ],[
-                '*___' . PHP_EOL .
-                '**__' . PHP_EOL.
-                '***_'   . PHP_EOL.
+                '*___'  . PHP_EOL .
+                '**__'  . PHP_EOL.
+                '***_'  . PHP_EOL.
                 '****'  . PHP_EOL.
-                '***_' . PHP_EOL.
-                '**__' . PHP_EOL.
+                '***_'  . PHP_EOL.
+                '**__'  . PHP_EOL.
                 '*___',
                 4
             ],
         ];
     }
     
+
     /**
-     * @dataProvider providerGenerateAsStringDown
+     * @dataProvider providerGenerateAsStringLeft
      * @param string $expected
      * @param int $height
      */
-    public function testGenerateAsStringDown($expected, $height)
+    public function testGenerateAsStringLeft($expected, $height)
     {
         $pyramid = new Pyramid($height);
-        $pyramidGenerator = new PyramidGenerator($pyramid, PyramidGenerator::DOWN);
+        $pyramidGenerator = new PyramidGenerator($pyramid, PyramidGenerator::LEFT);
         $this->assertEquals($expected, $pyramidGenerator->generateAsString());
     }
     
-    public function providerGenerateAsStringDown()
+    public function providerGenerateAsStringLeft()
     {
         return [
             [
@@ -121,25 +163,32 @@ class PyramidGeneratorTest extends WebTestCase
                 1
             ],
             [
-                '***' . PHP_EOL .
-                '_*_',
+                '_*'    . PHP_EOL .
+                '**'    . PHP_EOL.
+                '_*',
                 2
             ],
             [
-                '*****'. PHP_EOL .
-                '_***_' . PHP_EOL .
-                '__*__',
+                '__*'   . PHP_EOL .
+                '_**'   . PHP_EOL.
+                '***'   . PHP_EOL.
+                '_**'   . PHP_EOL.
+                '__*',
                 3
-            ],
-            [
-                '*******' . PHP_EOL .
-                '_*****_' . PHP_EOL .
-                '__***__' . PHP_EOL .
-                '___*___' ,
+            ],[
+                '___*'  . PHP_EOL .
+                '__**'  . PHP_EOL.
+                '_***'  . PHP_EOL.
+                '****'  . PHP_EOL.
+                '_***'  . PHP_EOL.
+                '__**'  . PHP_EOL.
+                '___*',
                 4
             ],
         ];
     }
+    
+    
     
     /**
      * @dataProvider providerGenerateAsArray

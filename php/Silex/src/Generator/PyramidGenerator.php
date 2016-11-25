@@ -56,13 +56,17 @@ class PyramidGenerator
     {
         if (self::UP === $this->pointTo) {
             return $this->generateAsStringUp();
-        } else if (self::RIGHT === $this->pointTo) {
-            return $this->generateAsStringRight();
-        } else if (self::DOWN === $this->pointTo) {
+        }
+        
+        if (self::DOWN === $this->pointTo) {
             return $this->generateAsStringDown();
         }
         
-        return false;
+        if (in_array($this->pointTo, [self::RIGHT, self::LEFT])) {
+            return $this->generateAsStringHorizontal();
+        }
+        
+        return sprintf('Unknoun direction %s', $this->pointTo);
     }
 
     private function generateAsStringUp()
@@ -89,13 +93,18 @@ class PyramidGenerator
         return rtrim($result);
     }
 
+    /**
+     * 
+     * @param int $row
+     * @return string
+     */
     private function generateRowAsStringVertical($row)
     {
         $height = $this->pyramid->getHeight();
         
-        $maxLenght = ($height * 2) - 1;
+        $baseLenght = ($height * 2) - 1;
         $filledAmount = ($row * 2) - 1;
-        $emptyAmount = ($maxLenght - $filledAmount) / 2;
+        $emptyAmount = ($baseLenght - $filledAmount) / 2;
         
         $emptyLeft = str_repeat($this->pyramid->getEmptyChar(), $emptyAmount);
         $filledChars = str_repeat($this->pyramid->getFilledChar(), 
@@ -107,37 +116,52 @@ class PyramidGenerator
         return $newRow . PHP_EOL;
     }
 
-    private function generateAsStringRight()
+    private function generateAsStringHorizontal()
     {
-        $width = ( int ) $this->pyramid->getHeight();
-        $height = ($width * 2) - 1;
-        
+        $height = (int) $this->pyramid->getHeight();
+        $base = ($height * 2) - 1;
         $result = '';
-        for ($row = 1; $row <= $height; $row++) {
-            
-            if ($row <= ($height / 2) + 1) {
-                $filledAmount = $row;
-            } else {
-                $filledAmount = $height - $row + 1;
-            }
-            
-            if ($row === $width) {
-                $emptyAmount = 0;
-            } else {
-                $emptyAmount = $width - $filledAmount;
-            }
-            
-            $filledChars = str_repeat($this->pyramid->getFilledChar(), 
-                    $filledAmount);
-            $emptyRight = str_repeat($this->pyramid->getEmptyChar(), 
-                    $emptyAmount);
-            
-            $newRow = $filledChars . $emptyRight;
-            
-            $result .= $newRow . PHP_EOL;
+        
+        for ($row = 1; $row <= $base; $row++) {
+            $result .= $this->generateRowAsStringHorizontal($row);
         }
         
         return rtrim($result);
+    }
+
+    /**
+     * 
+     * @param int $row
+     * @return string
+     */
+    private function generateRowAsStringHorizontal($row)
+    {
+        $height = (int) $this->pyramid->getHeight();
+        $base = ($height * 2) - 1;
+        
+        if ($row <= ($base / 2) + 1) {
+            $filledAmount = $row;
+        } else {
+            $filledAmount = $base - $row + 1;
+        }
+        
+        if ($row === $height) {
+            $emptyAmount = 0;
+        } else {
+            $emptyAmount = $height - $filledAmount;
+        }
+        
+        $filledChars = str_repeat($this->pyramid->getFilledChar(), 
+                $filledAmount);
+        $emptyChars = str_repeat($this->pyramid->getEmptyChar(), $emptyAmount);
+        
+        if (self::RIGHT === $this->pointTo) {
+            $newRow = $filledChars . $emptyChars;
+        } else {
+            $newRow = $emptyChars . $filledChars;
+        }
+        
+        return $newRow . PHP_EOL;
     }
 
     /**
