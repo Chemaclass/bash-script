@@ -58,7 +58,10 @@ class PyramidGenerator
             return $this->generateAsStringUp();
         } else if (self::RIGHT === $this->pointTo) {
             return $this->generateAsStringRight();
+        } else if (self::DOWN === $this->pointTo) {
+            return $this->generateAsStringDown();
         }
+        
         return false;
     }
 
@@ -72,9 +75,6 @@ class PyramidGenerator
             
             $filledAmount = ($row * 2) - 1;
             $emptyAmount = ($maxLenght - $filledAmount) / 2;
-            if ($emptyAmount < 0) {
-                $emptyAmount = 0;
-            }
             
             $emptyLeft = str_repeat($this->pyramid->getEmptyChar(), 
                     $emptyAmount);
@@ -99,7 +99,7 @@ class PyramidGenerator
         $result = '';
         for ($row = 1; $row <= $height; $row++) {
             
-            if ($row <= ($height / 2)+1) {
+            if ($row <= ($height / 2) + 1) {
                 $filledAmount = $row;
             } else {
                 $filledAmount = $height - $row + 1;
@@ -117,6 +117,32 @@ class PyramidGenerator
                     $emptyAmount);
             
             $newRow = $filledChars . $emptyRight;
+            
+            $result .= $newRow . PHP_EOL;
+        }
+        
+        return rtrim($result);
+    }
+
+    private function generateAsStringDown()
+    {
+        $height = $this->pyramid->getHeight();
+        $maxLenght = ($height * 2) - 1;
+        $result = '';
+        
+        for ($row = $height; $row >= 1; $row--) {
+            
+            $filledAmount = ($row * 2) - 1;
+            $emptyAmount = ($maxLenght - $filledAmount) / 2;
+            
+            $emptyLeft = str_repeat($this->pyramid->getEmptyChar(), 
+                    $emptyAmount);
+            $filledChars = str_repeat($this->pyramid->getFilledChar(), 
+                    $filledAmount);
+            $emptyRight = str_repeat($this->pyramid->getEmptyChar(), 
+                    $emptyAmount);
+            
+            $newRow = $emptyLeft . $filledChars . $emptyRight;
             
             $result .= $newRow . PHP_EOL;
         }
