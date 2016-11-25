@@ -14,14 +14,16 @@ class PyramidGenerator
     const LEFT = 'left';
     const RIGHT = 'right';
 
-    /** @int */
+    /** @var Pyramid */
     private $pyramid;
 
     /** @var string */
     private $pointTo;
 
     /**
-     * @param int $height
+     * 
+     * @param Pyramid $pyramid
+     * @param string $pointTo
      */
     public function __construct(Pyramid $pyramid, $pointTo = self::UP)
     {
@@ -66,13 +68,12 @@ class PyramidGenerator
             return $this->generateAsStringHorizontal();
         }
         
-        return sprintf('Unknoun direction %s', $this->pointTo);
+        return sprintf('Unknown direction: %s', $this->pointTo);
     }
 
     private function generateAsStringUp()
     {
         $result = '';
-        
         $height = $this->pyramid->getHeight();
         for ($row = 1; $row <= $height; $row++) {
             $result .= $this->generateRowAsStringVertical($row);
@@ -84,7 +85,6 @@ class PyramidGenerator
     private function generateAsStringDown()
     {
         $result = '';
-        
         $height = $this->pyramid->getHeight();
         for ($row = $height; $row >= 1; $row--) {
             $result .= $this->generateRowAsStringVertical($row);
@@ -101,8 +101,8 @@ class PyramidGenerator
     private function generateRowAsStringVertical($row)
     {
         $height = $this->pyramid->getHeight();
+        $baseLenght = $this->pyramid->getBaseLenght();
         
-        $baseLenght = ($height * 2) - 1;
         $filledAmount = ($row * 2) - 1;
         $emptyAmount = ($baseLenght - $filledAmount) / 2;
         
@@ -118,11 +118,10 @@ class PyramidGenerator
 
     private function generateAsStringHorizontal()
     {
-        $height = (int) $this->pyramid->getHeight();
-        $base = ($height * 2) - 1;
+        $baseLenght = $this->pyramid->getBaseLenght();
+       
         $result = '';
-        
-        for ($row = 1; $row <= $base; $row++) {
+        for ($row = 1; $row <= $baseLenght; $row++) {
             $result .= $this->generateRowAsStringHorizontal($row);
         }
         
@@ -137,12 +136,12 @@ class PyramidGenerator
     private function generateRowAsStringHorizontal($row)
     {
         $height = (int) $this->pyramid->getHeight();
-        $base = ($height * 2) - 1;
+        $baseLenght = $this->pyramid->getBaseLenght();
         
-        if ($row <= ($base / 2) + 1) {
+        if ($row <= ($baseLenght / 2) + 1) {
             $filledAmount = $row;
         } else {
-            $filledAmount = $base - $row + 1;
+            $filledAmount = $baseLenght - $row + 1;
         }
         
         if ($row === $height) {
@@ -172,12 +171,12 @@ class PyramidGenerator
         $result = [];
         
         $height = $this->pyramid->getHeight();
-        $maxLenght = ($height * 2) - 1;
+        $baseLenght = $this->pyramid->getBaseLenght();
         
         for ($row = 1; $row <= $height; $row++) {
             
             $filledAmount = ($row * 2) - 1;
-            $emptyAmount = ($maxLenght - $filledAmount) / 2;
+            $emptyAmount = ($baseLenght - $filledAmount) / 2;
             
             $newRow = [];
             $this->addChars($newRow, $this->pyramid->getEmptyChar(), 

@@ -14,6 +14,9 @@ class Pyramid
     /** @var int */
     private $height;
     
+    /** @var int */
+    private $baseLenght;
+    
     /** @var string */
     private $filledChar;
 
@@ -33,6 +36,7 @@ class Pyramid
     )
     {
         $this->height = $height;
+        $this->baseLenght = $height * 2 - 1;
         $this->filledChar = $filledChar;
         $this->emptyChar = $emptyChar;
     }
@@ -55,6 +59,15 @@ class Pyramid
         $this->height = $height;
         
         return $this;
+    }
+    
+    /**
+     *
+     * @return int
+     */
+    public function getBaseLenght()
+    {
+        return $this->baseLenght;
     }
 
     /**
