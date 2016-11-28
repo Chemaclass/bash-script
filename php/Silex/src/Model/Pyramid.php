@@ -3,7 +3,6 @@
 namespace Model;
 
 /**
- *
  * @author chema
  */
 class Pyramid
@@ -13,28 +12,26 @@ class Pyramid
 
     /** @var int */
     private $height;
-    
+
     /** @var int */
     private $baseLenght;
-    
+
     /** @var string */
     private $filledChar;
 
     /** @var string */
     private $emptyChar;
-    
+
     /**
-     *
-     * @param int $height        	
-     * @param string $filledChar        	
-     * @param string $emptyChar        	
+     * @param int    $height
+     * @param string $filledChar
+     * @param string $emptyChar
      */
     public function __construct(
-        $height, 
-        $filledChar = self::FILLED_CHAR, 
+        $height,
+        $filledChar = self::FILLED_CHAR,
         $emptyChar = self::EMPTY_CHAR
-    )
-    {
+    ) {
         $this->height = $height;
         $this->baseLenght = $height * 2 - 1;
         $this->filledChar = $filledChar;
@@ -42,7 +39,6 @@ class Pyramid
     }
 
     /**
-     *
      * @return int
      */
     public function getHeight()
@@ -51,18 +47,16 @@ class Pyramid
     }
 
     /**
-     *
-     * @param int $height        	
+     * @param int $height
      */
     public function setHeight($height)
     {
         $this->height = $height;
-        
+
         return $this;
     }
-    
+
     /**
-     *
      * @return int
      */
     public function getBaseLenght()
@@ -71,7 +65,6 @@ class Pyramid
     }
 
     /**
-     *
      * @return string
      */
     public function getFilledChar()
@@ -80,18 +73,16 @@ class Pyramid
     }
 
     /**
-     *
-     * @param string $filledChar        	
+     * @param string $filledChar
      */
     public function setFilledChar($filledChar)
     {
         $this->filledChar = $filledChar;
-        
+
         return $this;
     }
 
     /**
-     *
      * @return string
      */
     public function getEmptyChar()
@@ -100,23 +91,21 @@ class Pyramid
     }
 
     /**
-     *
-     * @param string $filledChar        	
+     * @param string $filledChar
      */
     public function setEmptyChar($emptyChar)
     {
         $this->emptyChar = $emptyChar;
-        
+
         return $this;
     }
 
     /**
-     *
      * @return string
      */
     public function __toString()
     {
-        return sprintf('Pyramid{ height: %d, filledChar: %s, emptyChar: %s }', 
+        return sprintf('Pyramid{ height: %d, filledChar: %s, emptyChar: %s }',
                 $this->height, $this->filledChar, $this->emptyChar);
     }
 }
