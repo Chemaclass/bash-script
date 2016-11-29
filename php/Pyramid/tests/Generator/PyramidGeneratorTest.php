@@ -24,7 +24,7 @@ class PyramidGeneratorTest extends WebTestCase
      */
     public function testGenerateAsStringUp($expected, $height)
     {
-        $pyramid = new Pyramid($height);
+        $pyramid = new Pyramid($height, '*', '_');
         $pyramidGenerator = new PyramidGenerator($pyramid,  PyramidGenerator::UP);
         $this->assertEquals($expected, $pyramidGenerator->generateAsString());
     }
@@ -65,7 +65,7 @@ class PyramidGeneratorTest extends WebTestCase
      */
     public function testGenerateAsStringDown($expected, $height)
     {
-        $pyramid = new Pyramid($height);
+        $pyramid = new Pyramid($height, '*', '_');
         $pyramidGenerator = new PyramidGenerator($pyramid, PyramidGenerator::DOWN);
         $this->assertEquals($expected, $pyramidGenerator->generateAsString());
     }
@@ -106,7 +106,7 @@ class PyramidGeneratorTest extends WebTestCase
      */
     public function testGenerateAsStringRight($expected, $height)
     {
-        $pyramid = new Pyramid($height);
+        $pyramid = new Pyramid($height, '*', '_');
         $pyramidGenerator = new PyramidGenerator($pyramid, PyramidGenerator::RIGHT);
         $this->assertEquals($expected, $pyramidGenerator->generateAsString());
     }
@@ -152,7 +152,7 @@ class PyramidGeneratorTest extends WebTestCase
      */
     public function testGenerateAsStringLeft($expected, $height)
     {
-        $pyramid = new Pyramid($height);
+        $pyramid = new Pyramid($height, '*', '_');
         $pyramidGenerator = new PyramidGenerator($pyramid, PyramidGenerator::LEFT);
         $this->assertEquals($expected, $pyramidGenerator->generateAsString());
     }
@@ -198,7 +198,7 @@ class PyramidGeneratorTest extends WebTestCase
      */
     public function testGenerateAsArray($expected, $height)
     {
-        $pyramid = new Pyramid($height);
+        $pyramid = new Pyramid($height, '*', '_');
         $pyramidGenerator = new PyramidGenerator($pyramid);
         $this->assertEquals($expected, $pyramidGenerator->generateAsArray());
     }

@@ -7,7 +7,7 @@ namespace Model;
  */
 class Pyramid
 {
-    const EMPTY_CHAR = '_';
+    const EMPTY_CHAR = ' ';
     const FILLED_CHAR = '*';
 
     /** @var int */
