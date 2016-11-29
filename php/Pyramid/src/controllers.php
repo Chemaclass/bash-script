@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig', array());
+    return $app['twig']->render('index.html.twig', []);
 })
 ->bind('homepage')
 ;
@@ -24,5 +24,9 @@ $app->error(function (\Exception $e, Request $request, $code) use ($app) {
         'errors/default.html.twig',
   ];
 
-    return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
+    $template = $app['twig']
+        ->resolveTemplate($templates)
+        ->render(['code' => $code]);
+
+    return new Response($template, $code);
 });
