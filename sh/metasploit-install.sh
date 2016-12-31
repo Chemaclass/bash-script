@@ -45,13 +45,9 @@ make clean
 
 ## Configuring Postgre SQL Server
 
-# We start by switching to the postgres user so we can create the user and database that we will use for Metasploit
-sudo -s
-su postgres
 # Now we create the user and Database, do record the database that you gave to the user since it will be used in the database.yml file that Metasploit and Armitage use to connect to the database.
-createuser msf -P -S -R -D
-createdb -O msf msf
-# exit
+sudo -u postgres bash -c "psql -c \"CREATE USER msf WITH PASSWORD 'msf';\""
+sudo -u postgres bash -c "psql -c \"CREATE DATABASE msf;\""
 
 ## Installing Metasploit Framework
 
@@ -71,4 +67,7 @@ bundle install
 cd metasploit-framework
 sudo bash -c 'for MSF in $(ls msf*); do ln -s /opt/metasploit-framework/$MSF /usr/local/bin/$MSF;done'
 
-# Resources: http://www.darkoperator.com/installing-metasploit-in-ubunt/
+# Resources:
+#http://www.darkoperator.com/installing-metasploit-in-ubunt/
+#http://stackoverflow.com/questions/18715345/how-to-create-a-user-for-postgres-from-the-command-line-for-bash-automation
+#
