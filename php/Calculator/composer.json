@@ -1,0 +1,23 @@
+{
+  "name": "chemaclass/fun-calculator",
+  "authors": [
+    {
+      "name": "Chemaclass",
+      "email": "chemaclass@outlook.es"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "^6.0",
+    "symfony/var-dumper": "^3.2"
+  },
+  "autoload": {
+    "psr-0": {
+      "": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "tests/"
+    }
+  }
+}
