@@ -19,30 +19,13 @@ final class Calculator
 
     public function __construct(string $initialInput = '0')
     {
-        $this->buffer = floatval($this->sanitizedInput($initialInput));
-    }
-
-    private function sanitizedInput(string $initialInput): string
-    {
-        return $this->removeMoreThanOneDot(
-            $this->removeNotAllowedChars($initialInput)
-        );
-    }
-
-    private function removeMoreThanOneDot(string $input): string
-    {
-        if (false !== ($dotPos = strpos($input, '.'))) {
-            $noDots = str_replace('.', '', $input);
-            $input = substr($noDots, 0, $dotPos) . '.' . substr($noDots, $dotPos);
-        }
-
-        return $input;
+        $this->buffer = floatval($this->removeNotAllowedChars($initialInput));
     }
 
     private function removeNotAllowedChars(string $input): string
     {
         return preg_replace(
-            sprintf('/[^0-9\,\.%s]/', implode('\\', self::ALLOW_OPERATORS)),
+            sprintf('/[^0-9\.%s]/', implode('\\', self::ALLOW_OPERATORS)),
             '',
             $input
         );
@@ -52,7 +35,7 @@ final class Calculator
     {
         $this->buffer = (new Operation(
             $this->buffer,
-            new Input($this->sanitizedInput($input)),
+            new Input($this->removeNotAllowedChars($input)),
             self::ALLOW_OPERATORS
         ))->operate();
 

@@ -94,18 +94,18 @@ class CalculatorTest extends TestCase
         $this->assertEquals(0.74810483673, $calculator->result());
     }
 
-    public function testIgnoreMoreThan1DotWith2Dots()
+    public function testIgnoreCharsAfter2DotsInConstructor()
     {
         $calculator = new Calculator('1.23.4');
         $calculator->push('+1.234');
-        $this->assertEquals(2.468, $calculator->result());
+        $this->assertEquals(2.464, $calculator->result());
     }
 
-    public function testIgnoreMoreThan1DotWith3Dots()
+    public function testIgnoreCharsAfter2DotsInPush()
     {
-        $calculator = new Calculator('1.23.4');
+        $calculator = new Calculator('1.234');
         $calculator->push('+1.2.3.4');
-        $this->assertEquals(2.468, $calculator->result());
+        $this->assertEquals(2.434, $calculator->result());
     }
 }
 
