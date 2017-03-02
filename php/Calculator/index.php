@@ -6,6 +6,7 @@ define('END_CHAR', '=');
 
 use Calculator\Calculator;
 use Calculator\CalculatorPresenter;
+use Calculator\Exceptions\NoOperatorError;
 
 echo '*****************************************' . PHP_EOL;
 echo "***** Welcome to ChemCalculator 1.0 *****" . PHP_EOL;
@@ -17,12 +18,18 @@ do {
     echo PHP_EOL;
     echo 'Buffer: ' . $calculator->result() . PHP_EOL;
     echo 'Input: ';
-    $input = readline();
-    if (HELP === $input) {
+
+    if (HELP === ($input = readline())) {
         showHelp();
-    } else {
-        $calculator->push($input);
+        continue;
     }
+
+    try {
+        $calculator->push($input);
+    } catch (NoOperatorError $e) {
+        echo $e->getMessage() . PHP_EOL;
+    }
+
 } while (END_CHAR !== $input);
 
 echo 'Result: ' . $calculator->result() . PHP_EOL;

@@ -1,5 +1,7 @@
 <?php declare(strict_types = 1);
 
+namespace Tests;
+
 use Calculator\Input;
 use Calculator\Operation;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +18,7 @@ class InputTest extends TestCase
     public function testNoOperator()
     {
         $input = new Input('2');
-        $this->assertEquals(Input::DEFAULT_OPERATOR, $input->operator());
+        $this->assertEquals(Input::DEFAULT_OPERATION, $input->operator());
         $this->assertEquals(2, $input->value());
     }
 

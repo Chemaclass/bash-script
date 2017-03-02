@@ -10,6 +10,6 @@ final class NoOperatorError extends \Exception
     {
         parent::__construct('No operator found as FIRST char in input: "' . $input . '"'
             . PHP_EOL
-            . 'Operators allow: ' . json_encode(Calculator::ALLOW_OPERATORS, JSON_UNESCAPED_SLASHES));
+            . 'Allow operators: ' . json_encode(Calculator::ALLOW_OPERATORS, JSON_UNESCAPED_SLASHES));
     }
 }

@@ -1,5 +1,7 @@
 <?php declare(strict_types = 1);
 
+namespace Tests;
+
 use Calculator\Calculator;
 use Calculator\Exceptions\NoOperatorError;
 use PHPUnit\Framework\TestCase;
@@ -106,6 +108,15 @@ class CalculatorTest extends TestCase
         $calculator = new Calculator('1.234');
         $calculator->push('+1.2.3.4');
         $this->assertEquals(2.434, $calculator->result());
+    }
+
+    public function testMultiplePush()
+    {
+        $calculator = (new Calculator('1'))
+            ->push('+2')
+            ->push('*3')
+            ->push('-4');
+        $this->assertEquals(5, $calculator->result());
     }
 }
 

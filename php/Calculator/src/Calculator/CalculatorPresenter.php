@@ -23,8 +23,8 @@ final class CalculatorPresenter
     public function history()
     {
         $historyStr = '';
-        foreach ($this->calculator->history() as $h) {
-            $historyStr .= $h;
+        foreach ($this->calculator->history() as $history) {
+            $historyStr = '(' . $historyStr . $history . ')';
         }
         return $historyStr;
     }

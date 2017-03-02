@@ -3,6 +3,7 @@
 namespace Calculator;
 
 use Calculator\Exceptions\NoOperatorError;
+use Calculator\Operation\OperationFactory;
 
 final class Operation
 {
@@ -10,6 +11,7 @@ final class Operation
     const MIN = '-';
     const MUL = '*';
     const DIV = '/';
+    const EQU = '=';
 
     /** @var float */
     private $buffer;
@@ -46,25 +48,14 @@ final class Operation
         return false;
     }
 
-    public function operate(): float
-    {
-        // TODO: SRP!
-        switch ($this->input->operator()) {
-            case self::SUM:
-                return $this->buffer + $this->input->value();
-            case self::MIN:
-                return $this->buffer - $this->input->value();
-            case self::MUL:
-                return $this->buffer * $this->input->value();
-            case self::DIV:
-                return $this->buffer / $this->input->value();
-        }
-
-        throw new NoOperatorError('');
-    }
-
     private function hasOperator(): bool
     {
         return in_array(substr((string)$this->input, 0, 1), $this->allowOperations);
+    }
+
+    public function operate(): float
+    {
+        return OperationFactory::forOperator($this->input->operator())
+            ->operate($this->buffer, $this->input->value());
     }
 }

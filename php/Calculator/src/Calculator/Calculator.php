@@ -9,6 +9,7 @@ final class Calculator
         Operation::MIN,
         Operation::MUL,
         Operation::DIV,
+        Operation::EQU,
     ];
 
     /** @var float */
@@ -20,12 +21,13 @@ final class Calculator
     public function __construct(string $initialInput = '0')
     {
         $this->buffer = floatval($this->removeNotAllowedChars($initialInput));
+        $this->history[] = $this->buffer;
     }
 
     private function removeNotAllowedChars(string $input): string
     {
         return preg_replace(
-            sprintf('/[^0-9\.%s]/', implode('\\', self::ALLOW_OPERATORS)),
+            sprintf('/[^0-9\.\=%s]/', implode('\\', self::ALLOW_OPERATORS)),
             '',
             $input
         );
@@ -33,11 +35,16 @@ final class Calculator
 
     public function push(string $input): Calculator
     {
+        $cleanInput = $this->removeNotAllowedChars($input);
         $this->buffer = (new Operation(
             $this->buffer,
-            new Input($this->removeNotAllowedChars($input)),
+            new Input($cleanInput),
             self::ALLOW_OPERATORS
         ))->operate();
+
+        if (!empty($cleanInput)) {
+            $this->history[] = $cleanInput;
+        }
 
         return $this;
     }

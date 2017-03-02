@@ -4,7 +4,7 @@ namespace Calculator;
 
 final class Input
 {
-    const DEFAULT_OPERATOR = '+';
+    const DEFAULT_OPERATION = Operation::SUM;
 
     /** @var float */
     private $value;
@@ -22,13 +22,13 @@ final class Input
     {
         $this->originalInput = $input;
 
-        $split = str_split(ltrim($input, '0'));
-        if (is_numeric($split[0])) {
-            $this->operator = self::DEFAULT_OPERATOR;
+        $charsFromInput = str_split(ltrim($input, '0'));
+        if (is_numeric($charsFromInput[0])) {
+            $this->operator = self::DEFAULT_OPERATION;
             $this->value = floatval($input);
         } else {
-            $this->operator = $split[0];
-            $this->value = floatval(implode('', array_slice($split, 1)));
+            $this->operator = $charsFromInput[0];
+            $this->value = floatval(implode('', array_slice($charsFromInput, 1)));
         }
     }
 
