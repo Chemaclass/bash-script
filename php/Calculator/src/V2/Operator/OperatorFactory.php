@@ -1,14 +1,14 @@
 <?php declare(strict_types = 1);
 
-namespace Calculator\V2\Operation;
+namespace Calculator\V2\Operator;
 
-final class OperationFactory
+final class OperatorFactory
 {
     private static $map = [
-        '+' => SumOperation::class,
-        '-' => MinOperation::class,
-        '*' => MulOperation::class,
-        '/' => DivOperation::class,
+        '+' => SumOperator::class,
+        '-' => MinOperator::class,
+        '*' => MulOperator::class,
+        '/' => DivOperator::class,
     ];
 
     public static function forOperator(string $operator): Operator
@@ -18,5 +18,10 @@ final class OperationFactory
         }
 
         return new static::$map[$operator];
+    }
+
+    public static function anEmpty()
+    {
+        return new EmptyOperator();
     }
 }

@@ -12,8 +12,7 @@ class CalculatorTest extends TestCase
      */
     public function onlyOneInput()
     {
-        /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('2');
         $this->assertEquals(2, $calculator->result());
     }
@@ -24,7 +23,7 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndSumOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('3');
         $calculator = $calculator->push('+');
         $this->assertEquals(3, $calculator->result());
@@ -36,7 +35,7 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndMinOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('3');
         $calculator = $calculator->push('-');
         $this->assertEquals(3, $calculator->result());
@@ -48,7 +47,7 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndMulOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('3');
         $calculator = $calculator->push('*');
         $this->assertEquals(0, $calculator->result());
@@ -60,7 +59,7 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndDivOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('3');
         $calculator = $calculator->push('/');
         $this->assertEquals(0, $calculator->result());
@@ -72,7 +71,7 @@ class CalculatorTest extends TestCase
     public function basicSum()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('20.111');
         $calculator = $calculator->push('+');
         $calculator = $calculator->push('30.222');
@@ -85,7 +84,7 @@ class CalculatorTest extends TestCase
     public function basicMin()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('20.105');
         $calculator = $calculator->push('-');
         $calculator = $calculator->push('30.205');
@@ -98,7 +97,7 @@ class CalculatorTest extends TestCase
     public function basicMul()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('20');
         $calculator = $calculator->push('*');
         $calculator = $calculator->push('30');
@@ -111,7 +110,7 @@ class CalculatorTest extends TestCase
     public function basicDiv()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('50');
         $calculator = $calculator->push('/');
         $calculator = $calculator->push('10');
@@ -124,7 +123,7 @@ class CalculatorTest extends TestCase
     public function basicSumWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('1');
         $calculator = $calculator->push('.');
         $calculator = $calculator->push('1');
@@ -144,7 +143,7 @@ class CalculatorTest extends TestCase
     public function basicMinWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('1');
         $calculator = $calculator->push('0');
         $calculator = $calculator->push('-');
@@ -161,7 +160,7 @@ class CalculatorTest extends TestCase
     public function basicMulWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('1');
         $calculator = $calculator->push('0');
         $calculator = $calculator->push('.');
@@ -178,7 +177,7 @@ class CalculatorTest extends TestCase
     public function basicDivWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('1');
         $calculator = $calculator->push('0');
         $calculator = $calculator->push('0');
@@ -194,7 +193,7 @@ class CalculatorTest extends TestCase
     public function operateSumAndMin()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('2.2');
         $calculator = $calculator->push('+');
         $calculator = $calculator->push('3.3');
@@ -209,7 +208,7 @@ class CalculatorTest extends TestCase
     public function operateSumAndMul()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('2.2');
         $calculator = $calculator->push('+');
         $calculator = $calculator->push('3.3');
@@ -224,7 +223,7 @@ class CalculatorTest extends TestCase
     public function operateMulAndSumAndMul()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
+        $calculator = Calculator::factory();
         $calculator = $calculator->push('2');
         $calculator = $calculator->push('*');
         $calculator = $calculator->push('2');

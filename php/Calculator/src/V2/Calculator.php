@@ -2,8 +2,9 @@
 
 namespace Calculator\V2;
 
-use Calculator\V2\Operation\OperationFactory;
-use Calculator\V2\Operation\Operator;
+use Calculator\V2\Operator\EmptyOperator;
+use Calculator\V2\Operator\OperatorFactory;
+use Calculator\V2\Operator\Operator;
 
 final class Calculator
 {
@@ -15,18 +16,18 @@ final class Calculator
     ];
 
     /** @var string */
-    private $bufferValue = '';
+    private $bufferValue;
 
     /** @var string */
-    private $currentValue = '';
+    private $currentValue;
 
-    /** @var Operator|null */
-    private $lastOperator = null;
+    /** @var Operator */
+    private $lastOperator;
 
-    public function __construct(
-        string $value1 = '',
-        string $value2 = '',
-        Operator $operator = null
+    private function __construct(
+        string $value1,
+        string $value2,
+        Operator $operator
     ) {
         $this->bufferValue = $this->cleanInput($value1);
         $this->currentValue = $this->cleanInput($value2);
@@ -40,6 +41,11 @@ final class Calculator
             '',
             $input
         );
+    }
+
+    public static function factory(): self
+    {
+        return new self('', '', OperatorFactory::anEmpty());
     }
 
     public function push(string $rawInput): self
@@ -60,11 +66,11 @@ final class Calculator
 
     private function forOperator(string $input): self
     {
-        if (empty($this->lastOperator)) {
-            return $this->calculateForOperator($input, $this->currentValue);
+        if ($this->isLastOperatorEmpty()) {
+            return Calculator::makeWithOperator($input, $this->currentValue);
         }
 
-        return $this->calculateForOperator(
+        return Calculator::makeWithOperator(
             $input,
             (string)$this
                 ->lastOperator
@@ -75,30 +81,34 @@ final class Calculator
         );
     }
 
-    private function calculateForOperator(string $operator, string $value)
+    private function isLastOperatorEmpty(): bool
+    {
+        return EmptyOperator::class === $this->lastOperator->name();
+    }
+
+    private function makeWithOperator(string $operator, string $bufferValue)
     {
         return new self(
-            $value,
+            $bufferValue,
             '',
-            OperationFactory::forOperator($operator)
+            OperatorFactory::forOperator($operator)
         );
     }
 
     private function forValue(string $input): self
     {
-        // 3rd case, increment the currentValue
-        if (empty($this->lastOperator)) {
-            return new self($this->bufferValue, $this->currentValue . $input);
-        }
-
-        $this->currentValue .= $input;
-        // 4th case, do the operation (buffer & newValue)
-        return new self($this->bufferValue, $this->currentValue, $this->lastOperator);
+        return new self(
+            $this->bufferValue,
+            $this->currentValue . $input,
+            $this->isLastOperatorEmpty()
+                ? OperatorFactory::anEmpty()
+                : $this->lastOperator
+        );
     }
 
     public function result(): float
     {
-        if (empty($this->lastOperator)) {
+        if ($this->isLastOperatorEmpty()) {
             return floatval($this->currentValue);
         }
 
