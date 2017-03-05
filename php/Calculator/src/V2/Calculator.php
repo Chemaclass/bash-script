@@ -20,7 +20,7 @@ final class Calculator
     /** @var string */
     private $currentValue = '';
 
-    /** @var Operator */
+    /** @var Operator|null */
     private $lastOperator = null;
 
     public function __construct(
@@ -35,11 +35,6 @@ final class Calculator
 
     private function cleanInput(string $input): string
     {
-        return $this->removeNotAllowedChars($input);
-    }
-
-    private function removeNotAllowedChars(string $input): string
-    {
         return preg_replace(
             sprintf('/[^0-9\.%s]/', implode('\\', self::ALLOW_OPERATORS)),
             '',
@@ -47,41 +42,58 @@ final class Calculator
         );
     }
 
-    public function push(string $input): self
+    public function push(string $rawInput): self
     {
-        $cleanInput = $this->cleanInput($input);
+        $input = $this->cleanInput($rawInput);
 
-        if ($this->isOperatorSign($cleanInput)) {
-            if (empty($this->lastOperator)) {
-                // 1st case, when there wasn't any operator before, so we got the first one
-                return new self(
-                    $this->currentValue,
-                    '',
-                    OperationFactory::forOperator($cleanInput)
-                );
-            }
-            // 2st case, when there was an operator, so we have to make the Operation here!
-            return new self(
-                (string)$this->lastOperator
-                    ->operate(floatval($this->bufferValue), floatval($this->currentValue)),
-                '',
-                null
-            );
+        if ($this->isOperatorSign($input)) {
+            return $this->forOperator($input);
         }
 
-        // 3rd case, increment the currentValue
-        if (empty($this->lastOperator)) {
-            return new static($this->bufferValue, $this->currentValue . $cleanInput);
-        }
-
-        $this->currentValue .= $cleanInput;
-        // 4th case, do the operation (buffer & newValue)
-        return new self($this->bufferValue, $this->currentValue, $this->lastOperator);
+        return $this->forValue($input);
     }
 
     private function isOperatorSign(string $cleanInput): bool
     {
         return in_array($cleanInput, self::ALLOW_OPERATORS);
+    }
+
+    private function forOperator(string $input): self
+    {
+        if (empty($this->lastOperator)) {
+            return $this->calculateForOperator($input, $this->currentValue);
+        }
+
+        return $this->calculateForOperator(
+            $input,
+            (string)$this
+                ->lastOperator
+                ->operate(
+                    floatval($this->bufferValue),
+                    floatval($this->currentValue)
+                )
+        );
+    }
+
+    private function calculateForOperator(string $operator, string $value)
+    {
+        return new self(
+            $value,
+            '',
+            OperationFactory::forOperator($operator)
+        );
+    }
+
+    private function forValue(string $input): self
+    {
+        // 3rd case, increment the currentValue
+        if (empty($this->lastOperator)) {
+            return new self($this->bufferValue, $this->currentValue . $input);
+        }
+
+        $this->currentValue .= $input;
+        // 4th case, do the operation (buffer & newValue)
+        return new self($this->bufferValue, $this->currentValue, $this->lastOperator);
     }
 
     public function result(): float

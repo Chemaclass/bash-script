@@ -187,5 +187,52 @@ class CalculatorTest extends TestCase
         $calculator = $calculator->push('0');
         $this->assertEquals(5, $calculator->result());
     }
+
+    /**
+     * @test
+     */
+    public function operateSumAndMin()
+    {
+        /** @var Calculator $calculator */
+        $calculator = new Calculator();
+        $calculator = $calculator->push('2.2');
+        $calculator = $calculator->push('+');
+        $calculator = $calculator->push('3.3');
+        $calculator = $calculator->push('-');
+        $calculator = $calculator->push('1.1');
+        $this->assertEquals(4.4, $calculator->result());
+    }
+
+    /**
+     * @test
+     */
+    public function operateSumAndMul()
+    {
+        /** @var Calculator $calculator */
+        $calculator = new Calculator();
+        $calculator = $calculator->push('2.2');
+        $calculator = $calculator->push('+');
+        $calculator = $calculator->push('3.3');
+        $calculator = $calculator->push('*');
+        $calculator = $calculator->push('2');
+        $this->assertEquals(11, $calculator->result());
+    }
+
+    /**
+     * @test
+     */
+    public function operateMulAndSumAndMul()
+    {
+        /** @var Calculator $calculator */
+        $calculator = new Calculator();
+        $calculator = $calculator->push('2');
+        $calculator = $calculator->push('*');
+        $calculator = $calculator->push('2');
+        $calculator = $calculator->push('+');
+        $calculator = $calculator->push('3');
+        $calculator = $calculator->push('*');
+        $calculator = $calculator->push('2');
+        $this->assertEquals(14, $calculator->result());
+    }
 }
 
