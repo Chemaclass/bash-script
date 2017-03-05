@@ -4,9 +4,9 @@ require_once 'vendor/autoload.php';
 define('HELP', 'help');
 define('END_CHAR', '=');
 
-use Calculator\Calculator;
-use Calculator\CalculatorPresenter;
-use Calculator\Exceptions\NoOperatorError;
+use Calculator\V1\Calculator;
+use Calculator\V1\CalculatorPresenter;
+use Calculator\V1\Exceptions\NoOperatorError;
 
 echo '*****************************************' . PHP_EOL;
 echo "***** Welcome to ChemCalculator 1.0 *****" . PHP_EOL;
@@ -37,7 +37,7 @@ echo 'History: ' . (new CalculatorPresenter($calculator))->history() . PHP_EOL;
 
 function showHelp()
 {
-    echo PHP_EOL . strtoupper('How this Calculator works: ') . PHP_EOL;
+    echo PHP_EOL . strtoupper('How this V1 works: ') . PHP_EOL;
     echo '--------------------------' . PHP_EOL;
     echo '> A calculator executes operations on decimal numbers. 
         Numbers are provided by entering digits (0-9) or a decimal dot (.) one after the other in an input register.' . PHP_EOL;

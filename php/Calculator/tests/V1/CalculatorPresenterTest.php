@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests;
+namespace Tests\V1;
 
 use Calculator\V1\Calculator;
 use Calculator\V1\CalculatorPresenter;
