@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Calculator\Operation;
+namespace Calculator\V1\Operation;
 
-final class EquOperation implements Operable
+final class SumOperation implements Operable
 {
     public function operate(float $value1, float $value2): float
     {
-        return $value1;
+        return $value1 + $value2;
     }
 }

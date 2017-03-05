@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Calculator;
+namespace Calculator\V1;
 
 final class CalculatorPresenter
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Calculator;
+namespace Calculator\V1;
 
 final class Calculator
 {
@@ -33,7 +33,7 @@ final class Calculator
         );
     }
 
-    public function push(string $input): Calculator
+    public function push(string $input): self
     {
         $cleanInput = $this->removeNotAllowedChars($input);
         $this->buffer = (new Operation(

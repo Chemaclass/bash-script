@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Calculator\Input;
-use Calculator\Operation;
+use Calculator\V1\Input;
+use Calculator\V1\Operation;
 use PHPUnit\Framework\TestCase;
 
 class InputTest extends TestCase

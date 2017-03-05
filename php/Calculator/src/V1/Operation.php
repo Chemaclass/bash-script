@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Calculator;
+namespace Calculator\V1;
 
-use Calculator\Exceptions\NoOperatorError;
-use Calculator\Operation\OperationFactory;
+use Calculator\V1\Exceptions\NoOperatorError;
+use Calculator\V1\Operation\OperationFactory;
 
 final class Operation
 {

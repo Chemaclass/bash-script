@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Calculator\Exceptions;
+namespace Calculator\V1\Exceptions;
 
-use Calculator\Calculator;
+use Calculator\V1\Calculator;
 
 final class NoOperatorError extends \Exception
 {

@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Calculator\Calculator;
-use Calculator\CalculatorPresenter;
+use Calculator\V1\Calculator;
+use Calculator\V1\CalculatorPresenter;
 use PHPUnit\Framework\TestCase;
 
 final class CalculatorPresenterTest extends TestCase

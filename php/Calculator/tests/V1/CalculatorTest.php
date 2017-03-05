@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Calculator\Calculator;
-use Calculator\Exceptions\NoOperatorError;
+use Calculator\V1\Calculator;
+use Calculator\V1\Exceptions\NoOperatorError;
 use PHPUnit\Framework\TestCase;
 
 class CalculatorTest extends TestCase

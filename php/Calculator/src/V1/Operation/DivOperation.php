@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Calculator\Operation;
+namespace Calculator\V1\Operation;
 
 final class DivOperation implements Operable
 {
