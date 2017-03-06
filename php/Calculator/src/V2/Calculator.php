@@ -2,6 +2,7 @@
 
 namespace Calculator\V2;
 
+use Calculator\V1\Operation\OperationFactory;
 use Calculator\V2\Operator\EmptyOperator;
 use Calculator\V2\Operator\OperatorFactory;
 use Calculator\V2\Operator\Operator;
@@ -24,14 +25,16 @@ final class Calculator
     /** @var Operator */
     private $lastOperator;
 
-    private function __construct(
-        string $value1,
-        string $value2,
-        Operator $operator
+    public function __construct(
+        string $value1 = '',
+        string $value2 = '',
+        Operator $operator = null
     ) {
         $this->bufferValue = $this->cleanInput($value1);
         $this->currentValue = $this->cleanInput($value2);
-        $this->lastOperator = $operator;
+        $this->lastOperator = empty($operator)
+            ? OperatorFactory::anEmpty()
+            : $operator;
     }
 
     private function cleanInput(string $input): string
@@ -41,11 +44,6 @@ final class Calculator
             '',
             $input
         );
-    }
-
-    public static function factory(): self
-    {
-        return new self('', '', OperatorFactory::anEmpty());
     }
 
     public function push(string $rawInput): self
