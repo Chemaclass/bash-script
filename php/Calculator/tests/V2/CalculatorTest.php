@@ -233,5 +233,34 @@ class CalculatorTest extends TestCase
         $calculator = $calculator->push('2');
         $this->assertEquals(14, $calculator->result());
     }
+
+    /**
+     * @test
+     */
+    public function takeOnlyFirstDotDecimalAndIgnoreTheRest()
+    {
+        /** @var Calculator $calculator */
+        $calculator = new Calculator();
+        $calculator = $calculator->push('1');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('1');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('9');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('9');
+        $calculator = $calculator->push('+');
+        $calculator = $calculator->push('2');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('1');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('9');
+        $calculator = $calculator->push('+');
+        $calculator = $calculator->push('3');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('1');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('9');
+        $this->assertEquals(6.3, $calculator->result());
+    }
 }
 

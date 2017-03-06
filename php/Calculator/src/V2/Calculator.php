@@ -2,7 +2,6 @@
 
 namespace Calculator\V2;
 
-use Calculator\V1\Operation\OperationFactory;
 use Calculator\V2\Operator\EmptyOperator;
 use Calculator\V2\Operator\OperatorFactory;
 use Calculator\V2\Operator\Operator;
