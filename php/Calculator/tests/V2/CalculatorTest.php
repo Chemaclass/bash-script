@@ -262,5 +262,24 @@ class CalculatorTest extends TestCase
         $calculator = $calculator->push('9');
         $this->assertEquals(6.3, $calculator->result());
     }
+
+    /**
+     * @test
+     */
+    public function sumNegativeNumbersWithDecimals()
+    {
+        /** @var Calculator $calculator */
+        $calculator = new Calculator();
+        $calculator = $calculator->push('-');
+        $calculator = $calculator->push('2');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('5');
+        $calculator = $calculator->push('+');
+        $calculator = $calculator->push('-');
+        $calculator = $calculator->push('3');
+        $calculator = $calculator->push('.');
+        $calculator = $calculator->push('5');
+        $this->assertEquals(-6, $calculator->result());
+    }
 }
 
