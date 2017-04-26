@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Tests\V2;
 
@@ -12,8 +12,8 @@ class CalculatorTest extends TestCase
      */
     public function onlyOneInput()
     {
-        $calculator = new Calculator();
-        $calculator = $calculator->push('2');
+        $calculator = (new Calculator())
+            ->push('2');
         $this->assertEquals(2, $calculator->result());
     }
 
@@ -23,9 +23,9 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndSumOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('+');
+        $calculator = (new Calculator())
+            ->push('3')
+            ->push('+');
         $this->assertEquals(3, $calculator->result());
     }
 
@@ -35,9 +35,9 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndMinOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('-');
+        $calculator = (new Calculator())
+            ->push('3')
+            ->push('-');
         $this->assertEquals(3, $calculator->result());
     }
 
@@ -47,9 +47,9 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndMulOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('*');
+        $calculator = (new Calculator())
+            ->push('3')
+            ->push('*');
         $this->assertEquals(0, $calculator->result());
     }
 
@@ -59,9 +59,9 @@ class CalculatorTest extends TestCase
     public function onlyOneInputAndDivOperator()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('/');
+        $calculator = (new Calculator())
+            ->push('3')
+            ->push('/');
         $this->assertEquals(0, $calculator->result());
     }
 
@@ -71,10 +71,10 @@ class CalculatorTest extends TestCase
     public function basicSum()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('20.111');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('30.222');
+        $calculator = (new Calculator())
+            ->push('20.111')
+            ->push('+')
+            ->push('30.222');
         $this->assertEquals(50.333, $calculator->result());
     }
 
@@ -84,10 +84,10 @@ class CalculatorTest extends TestCase
     public function basicMin()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('20.105');
-        $calculator = $calculator->push('-');
-        $calculator = $calculator->push('30.205');
+        $calculator = (new Calculator())
+            ->push('20.105')
+            ->push('-')
+            ->push('30.205');
         $this->assertEquals(-10.1, $calculator->result());
     }
 
@@ -97,10 +97,10 @@ class CalculatorTest extends TestCase
     public function basicMul()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('20');
-        $calculator = $calculator->push('*');
-        $calculator = $calculator->push('30');
+        $calculator = (new Calculator())
+            ->push('20')
+            ->push('*')
+            ->push('30');
         $this->assertEquals(600, $calculator->result());
     }
 
@@ -110,10 +110,10 @@ class CalculatorTest extends TestCase
     public function basicDiv()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('50');
-        $calculator = $calculator->push('/');
-        $calculator = $calculator->push('10');
+        $calculator = (new Calculator())
+            ->push('50')
+            ->push('/')
+            ->push('10');
         $this->assertEquals(5, $calculator->result());
     }
 
@@ -123,17 +123,17 @@ class CalculatorTest extends TestCase
     public function basicSumWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('2');
+        $calculator = (new Calculator())
+            ->push('1')
+            ->push('.')
+            ->push('1')
+            ->push('3')
+            ->push('+')
+            ->push('2')
+            ->push('2')
+            ->push('.')
+            ->push('2')
+            ->push('2');
         $this->assertEquals(23.35, $calculator->result());
     }
 
@@ -143,14 +143,14 @@ class CalculatorTest extends TestCase
     public function basicMinWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('0');
-        $calculator = $calculator->push('-');
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('0');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('5');
+        $calculator = (new Calculator())
+            ->push('1')
+            ->push('0')
+            ->push('-')
+            ->push('3')
+            ->push('0')
+            ->push('.')
+            ->push('5');
         $this->assertEquals(-20.5, $calculator->result());
     }
 
@@ -160,14 +160,14 @@ class CalculatorTest extends TestCase
     public function basicMulWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('0');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('5');
-        $calculator = $calculator->push('*');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('0');
+        $calculator = (new Calculator())
+            ->push('1')
+            ->push('0')
+            ->push('.')
+            ->push('5')
+            ->push('*')
+            ->push('2')
+            ->push('0');
         $this->assertEquals(210, $calculator->result());
     }
 
@@ -177,13 +177,13 @@ class CalculatorTest extends TestCase
     public function basicDivWithIndependentDigits()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('0');
-        $calculator = $calculator->push('0');
-        $calculator = $calculator->push('/');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('0');
+        $calculator = (new Calculator())
+            ->push('1')
+            ->push('0')
+            ->push('0')
+            ->push('/')
+            ->push('2')
+            ->push('0');
         $this->assertEquals(5, $calculator->result());
     }
 
@@ -193,12 +193,12 @@ class CalculatorTest extends TestCase
     public function operateSumAndMin()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('2.2');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('3.3');
-        $calculator = $calculator->push('-');
-        $calculator = $calculator->push('1.1');
+        $calculator = (new Calculator())
+            ->push('2.2')
+            ->push('+')
+            ->push('3.3')
+            ->push('-')
+            ->push('1.1');
         $this->assertEquals(4.4, $calculator->result());
     }
 
@@ -208,12 +208,12 @@ class CalculatorTest extends TestCase
     public function operateSumAndMul()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('2.2');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('3.3');
-        $calculator = $calculator->push('*');
-        $calculator = $calculator->push('2');
+        $calculator = (new Calculator())
+            ->push('2.2')
+            ->push('+')
+            ->push('3.3')
+            ->push('*')
+            ->push('2');
         $this->assertEquals(11, $calculator->result());
     }
 
@@ -223,14 +223,14 @@ class CalculatorTest extends TestCase
     public function operateMulAndSumAndMul()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('*');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('*');
-        $calculator = $calculator->push('2');
+        $calculator = (new Calculator())
+            ->push('2')
+            ->push('*')
+            ->push('2')
+            ->push('+')
+            ->push('3')
+            ->push('*')
+            ->push('2');
         $this->assertEquals(14, $calculator->result());
     }
 
@@ -240,26 +240,26 @@ class CalculatorTest extends TestCase
     public function takeOnlyFirstDotDecimalAndIgnoreTheRest()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('9');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('9');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('9');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('1');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('9');
+        $calculator = (new Calculator())
+            ->push('1')
+            ->push('.')
+            ->push('1')
+            ->push('.')
+            ->push('9')
+            ->push('.')
+            ->push('9')
+            ->push('+')
+            ->push('2')
+            ->push('.')
+            ->push('1')
+            ->push('.')
+            ->push('9')
+            ->push('+')
+            ->push('3')
+            ->push('.')
+            ->push('1')
+            ->push('.')
+            ->push('9');
         $this->assertEquals(6.3, $calculator->result());
     }
 
@@ -269,16 +269,16 @@ class CalculatorTest extends TestCase
     public function sumNegativeNumbersWithDecimals()
     {
         /** @var Calculator $calculator */
-        $calculator = new Calculator();
-        $calculator = $calculator->push('-');
-        $calculator = $calculator->push('2');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('5');
-        $calculator = $calculator->push('+');
-        $calculator = $calculator->push('-');
-        $calculator = $calculator->push('3');
-        $calculator = $calculator->push('.');
-        $calculator = $calculator->push('5');
+        $calculator = (new Calculator())
+            ->push('-')
+            ->push('2')
+            ->push('.')
+            ->push('5')
+            ->push('+')
+            ->push('-')
+            ->push('3')
+            ->push('.')
+            ->push('5');
         $this->assertEquals(-6, $calculator->result());
     }
 }
