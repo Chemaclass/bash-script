@@ -51,10 +51,19 @@
   function crawlUserList(selector, { nameAttrName, hrefAttrName }) {
     const users = new UserList();
     document.querySelectorAll(selector).forEach(function(el) {
+      function getHref(el) {
+        const href = el.getAttribute(hrefAttrName);
+        const parsedHref = href.substring(0, href.indexOf("?"));
+        if (parsedHref.endsWith("profile.php")) {
+          // ignore the users that doesn't have a custom url
+          return;
+        }
+        return parsedHref;
+      }
       const userName = el.getAttribute(nameAttrName);
-      const href = el.getAttribute(hrefAttrName);
+      const href = getHref(el);
       if (userName && href) {
-        users.add(new User(userName, href.substring(0, href.indexOf("?"))));
+        users.add(new User(userName, href));
       }
     });
     return users;
@@ -93,5 +102,7 @@
   console.log("Total users");
   printUserNames(usersThatSharedThePost);
   console.log(`Random users`);
-  printUserNames(findRandomUsers(usersThatSharedThePost, 5));
+  const randomUsers = findRandomUsers(usersThatSharedThePost, 5);
+  printUserNames(randomUsers);
+  console.table(randomUsers.all());
 })();
