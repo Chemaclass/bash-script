@@ -13,8 +13,9 @@
   "use strict";
 
   class User {
-    constructor(name) {
+    constructor(name, href) {
       this.name = name;
+      this.href = href;
     }
   }
 
@@ -47,12 +48,13 @@
     }
   }
 
-  function crawlUserList(selector, nameAttribute) {
+  function crawlUserList(selector, { nameAttrName, hrefAttrName }) {
     const users = new UserList();
     document.querySelectorAll(selector).forEach(function(el) {
-      const userName = el.getAttribute(nameAttribute);
-      if (userName !== null) {
-        users.add(new User(userName));
+      const userName = el.getAttribute(nameAttrName);
+      const href = el.getAttribute(hrefAttrName);
+      if (userName && href) {
+        users.add(new User(userName, href.substring(0, href.indexOf("?"))));
       }
     });
     return users;
@@ -60,8 +62,8 @@
 
   function printUserNames(users) {
     users.all().forEach((user, index) => {
-      const { name } = user;
-      console.log(`id${index}, name:${name}`);
+      const { name, href } = user;
+      console.log(`index:${index}, name:${name}, href:${href}`);
     });
   }
 
@@ -85,8 +87,8 @@
   }
 
   const sharedSelector = "#repost_view_dialog > div div.clearfix a.profileLink";
-  const nameAttribute = "title";
-  const usersThatSharedThePost = crawlUserList(sharedSelector, nameAttribute);
+  const attributes = { nameAttrName: "title", hrefAttrName: "href" };
+  const usersThatSharedThePost = crawlUserList(sharedSelector, attributes);
 
   console.log("Total users");
   printUserNames(usersThatSharedThePost);
