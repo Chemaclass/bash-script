@@ -4,19 +4,17 @@
  * I need to select some users randomly from a given list, where these users
  * have to have done some actions. For example, given a certain Facebook post,
  * they have to: shared it and/or liked it and/or commented on it.
- */
-
-/**
+ *
  * Task:
  * Print all user names that shared a given Facebook post.
  * AC: Run it directly using the browser console.
  */
-function printUserNames() {
+(() => {
   "use strict";
+
   class User {
     constructor(name) {
       this.name = name;
-      this.didShared = false; // TODO: specify whether it was shared|liked|commented
     }
   }
 
@@ -43,21 +41,26 @@ function printUserNames() {
     }
   }
 
-  const users = new UserList();
+  function crawlUserInfo(selector, nameAttribute) {
+    const users = new UserList();
+    document.querySelectorAll(selector).forEach(function(el) {
+      const userName = el.getAttribute(nameAttribute);
+      if (userName !== null) {
+        users.add(new User(userName));
+      }
+    });
+    return users;
+  }
 
-  const sharedPostSelector =
-    "#repost_view_dialog > div div.clearfix a.profileLink";
-  document.querySelectorAll(sharedPostSelector).forEach(function(el) {
-    const userName = el.getAttribute("title");
-    if (userName !== null) {
-      users.add(new User(userName));
-    }
-  });
+  function printUserNames(users) {
+    users.all().forEach((user, i) => {
+      const { name } = user;
+      console.log(`id${i}, name:${name}`);
+    });
+  }
 
-  users.all().forEach((user, i) => {
-    const { name } = user;
-    console.log(`id${i}, name:${name}`);
-  });
-}
-
-printUserNames();
+  const sharedSelector = "#repost_view_dialog > div div.clearfix a.profileLink";
+  const nameAttribute = "title";
+  const usersThatSharedThePost = crawlUserInfo(sharedSelector, nameAttribute);
+  printUserNames(usersThatSharedThePost);
+})();
